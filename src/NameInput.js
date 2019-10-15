@@ -1,21 +1,37 @@
 import React, {useState} from 'react';
 
-const NameInput = ({ handleSubmit, handleShuffle}) => {
+const NameInput = ({handleSubmit, handleShuffle}) => {
 
     const [newName, setNewName] = useState("");
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (newName.length > 0 ) {
+        if (newName.length > 0) {
             handleSubmit(newName);
             setNewName("");
         }
     };
 
+    let styles = {
+      formStyle: {
+          textAlign: "center",
+          marginTop: "2em",
+         // background: "rgb(0,143,16)",
+          color: "black",
+          padding: "25px",
+      }
+    };
+
     return (
-        <form>
-            <label htmlFor="">Enter Name
-                <input value={newName} placeholder="Name" onChange={(e) => setNewName(e.target.value)}/>
+        <form style={styles.formStyle}>
+            <label htmlFor="">Enter Name:
+                <input
+                    style={{marginLeft: "10px"}}
+                    value={newName}
+                    placeholder="Name"
+                    onChange={(e) => {
+                        if (newName.length < 21) setNewName(e.target.value)
+                    }}/>
             </label>
             <button onClick={onSubmit}>Enter</button>
             <button onClick={handleShuffle}>shuffle</button>

@@ -1,47 +1,62 @@
 import React, {useState} from 'react';
 
-const Person = ({name, secret = false, deletePerson, color}) => {
+const Person = ({name, isSecret, deletePerson, number, anotherOpen, setAnotherOpen}) => {
     const [revealed, setRevealed] = useState(false);
 
     let styles = {
-        color: "white",
-        backgroundColor: "red",
-        height: "85px",
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "10px",
-        alignItems: "center",
-        fontSize: "1.3em"
+        listItem: {
+            color: "white",
+            backgroundColor: "red",
+            height: "50px",
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "50px",
+            alignItems: "center",
+            fontSize: "1.3em"
+        },
+        btnStyle: {
+            padding: "10px",
+            borderRadius: "10%",
+            backgroundColor: "#d4d3d6",
+            fontSize: "1rem"
+        }
     };
 
-    if (secret && !revealed) {
-        styles.justifyContent = "center";
-    }
+    if (isSecret) number++;
+    if (number % 2 === 0) styles.listItem = Object.assign(styles.listItem, {backgroundColor: "green"});
 
-    if(secret) color++;
-    if (color % 2 === 0) styles = Object.assign(styles, {backgroundColor: "green"});
 
-    let btnStyle = {
-        color: "white"
-    };
-
-    if (secret && !revealed) {
+    if (isSecret && !revealed) {
         return (
-            <div style={styles}>
-                <button onClick={() => setRevealed(true)}>reveal</button>
-            </div>
+            <li style={styles.listItem}>
+                <p>secret</p>
+                <button
+                    style={styles.btnStyle}
+                    onClick={() => {
+                        if (anotherOpen) alert("only one secret at a time");
+                        else {
+                            setAnotherOpen(true);
+                            setRevealed(true);
+                        }
+                    }}>show
+                </button>
+            </li>
         );
+    } else {
+        return (
+            <li style={styles.listItem}>
+                <p>{number + 1}: {name}</p>
+                <button
+                    style={styles.btnStyle}
+                    onClick={() => {
+                        setAnotherOpen(false);
+                        deletePerson(name);
+                    }}>
+                    {isSecret ? 'got it!' : 'delete'}
+                </button>
+            </li>
+        )
     }
-
-    return (
-        <li style={styles}>
-            {name}
-            <button
-                onClick={() => deletePerson(name)}>
-                {secret ? 'o' : 'x'}
-            </button>
-        </li>
-    )
 };
 
 export default Person;

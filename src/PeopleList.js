@@ -1,27 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import Person from "./Person";
 
 const PeopleList = ({people, deletePerson, secret}) => {
-    let olStyle = {
-        paddingLeft: "0",
-    };
+    const [anotherIsOpen, setAnotherIsOpen] = useState(false);
 
-    let peopleListStyle = {
-        flexGrow: '1',
+    let ulStyle = {
+        paddingLeft: "0" , // TODO hmmm maybe some padding here?
+        flexBasis: "100%",
     };
 
     return (
-        <div id="people-list" style={peopleListStyle}>
-            <ol style={olStyle}>
-                {people.map((person, i) => (
-                    <Person key={person}
-                            color={i}
-                            name={person}
-                            deletePerson={deletePerson}
-                            secret={secret}/>
-                ))}
-            </ol>
-        </div>
+        <ul style={ulStyle}>
+            {people.map((person, i) => (
+                <Person key={person}
+                        name={person}
+                        number={i}
+                        deletePerson={deletePerson}
+                        isSecret={secret}
+                        anotherOpen={anotherIsOpen}
+                        setAnotherOpen={setAnotherIsOpen}/>
+            ))}
+        </ul>
     )
 };
 

@@ -48,13 +48,25 @@ export const SecretSanta = () => {
         setSecretPeople(newSecretList);
     };
 
+    const styles = {
+        display: "flex",
+        secretSanta: {
+            maxWidth: "1000px",
+            margin: "0 auto",
+        },
+        peopleListContainer: {
+            display: "flex"
+        }
+    };
+
     return (
-        <div style={{display: "flex", flexDirection: "column", maxWidth: "1000px", margin: "0 auto"}}>
+        <div style={styles.secretSanta}>
             <NameInput
                 handleSubmit={handleSubmit}
-                handleShuffle={handleShuffle}/>
+                handleShuffle={handleShuffle}
+            />
             {people.length > 0 ?
-                <div className="people-list" style={{flexGrow: "1"}}>
+                <div style={styles.peopleListContainer}>
                     <PeopleList people={people} deletePerson={handleDelete}/>
                     {secretPeople.length > 0 &&
                     <PeopleList people={secretPeople} secret={true} deletePerson={handleSecretDelete}/>
@@ -63,6 +75,7 @@ export const SecretSanta = () => {
                 :
                 <p>Please Enter a Name</p>
             }
+            <p>Size: {people.length}</p>
 
         </div>
     )
