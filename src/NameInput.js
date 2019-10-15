@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 
-const NameInput = ({handleSubmit, handleShuffle}) => {
+const NameInput = ({handleSubmit, handleShuffle, err}) => {
 
     const [newName, setNewName] = useState("");
+    const [error, setError] = useState(err);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -23,7 +24,9 @@ const NameInput = ({handleSubmit, handleShuffle}) => {
     };
 
     return (
-        <form style={styles.formStyle}>
+        <form
+            className={err && "animated shake"}
+            style={styles.formStyle}>
             <label htmlFor="">Enter Name:
                 <input
                     style={{marginLeft: "10px"}}

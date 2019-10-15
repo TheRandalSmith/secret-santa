@@ -7,13 +7,17 @@ import NameInput from "./NameInput";
 export const SecretSanta = () => {
     const [people, setPeople] = useState(mockPeople);
     const [secretPeople, setSecretPeople] = useState([]);
+    const [poo, setPoo] = useState(false);
+    const [done, setDone] = useState(false);
+
 
     const handleSubmit = (newName) => {
         if (!people.includes(newName)) {
             setPeople([...people, newName]);
             setSecretPeople([]);
         } else {
-            alert(`That name is already taken`);
+            setPoo(true)
+            setTimeout(() => setPoo(false), 500);
         }
     };
 
@@ -35,17 +39,20 @@ export const SecretSanta = () => {
     };
 
     const handleDelete = (name) => {
-        let newList = people.filter(e => e !== name);
+        const newList = people.filter(e => e !== name);
         setPeople(newList);
         setSecretPeople([]);
     };
 
     const handleSecretDelete = (name) => {
         const indexOf = secretPeople.indexOf(name);
-        let newList = people.filter((e, i) => i !== indexOf);
-        let newSecretList = secretPeople.filter((e, i) => i !== indexOf);
-        setPeople(newList);
-        setSecretPeople(newSecretList);
+        const newList = people.filter((e, i) => i !== indexOf);
+        const newSecretList = secretPeople.filter((e, i) => i !== indexOf);
+        setDone(true);
+        setTimeout(() => {
+            setPeople(newList);
+            setSecretPeople(newSecretList);
+        }, 870);
     };
 
     const styles = {
@@ -56,6 +63,10 @@ export const SecretSanta = () => {
         },
         peopleListContainer: {
             display: "flex"
+        },
+        para: {
+            fontSize: "5em",
+            textAlign: "center"
         }
     };
 
@@ -64,6 +75,7 @@ export const SecretSanta = () => {
             <NameInput
                 handleSubmit={handleSubmit}
                 handleShuffle={handleShuffle}
+                err={poo}
             />
             {people.length > 0 ?
                 <div style={styles.peopleListContainer}>
@@ -73,9 +85,12 @@ export const SecretSanta = () => {
                     }
                 </div>
                 :
-                <p>Please Enter a Name</p>
+                <p style={styles.para}>{done ? "Merry Christmas!!!" : "Please enter a name"}</p>
+
             }
-            <p>Size: {people.length}</p>
+            {people.length > 0 &&
+            <p> {`Size ${people.length}`} </p>
+            }
 
         </div>
     )

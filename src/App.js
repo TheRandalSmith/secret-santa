@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {SecretSanta} from "./SecretSanta";
+//TODO fix animation
 
 const App = () => {
     const style = {

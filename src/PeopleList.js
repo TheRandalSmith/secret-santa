@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Person from "./Person";
 
+// TODO Move list into this component
 const PeopleList = ({people, deletePerson, secret}) => {
     const [anotherIsOpen, setAnotherIsOpen] = useState(false);
 
@@ -10,7 +11,8 @@ const PeopleList = ({people, deletePerson, secret}) => {
     };
 
     return (
-        <ul style={ulStyle}>
+        <ul className={secret && "animated bounceInRight"}
+            style={ulStyle}>
             {people.map((person, i) => (
                 <Person key={person}
                         name={person}
