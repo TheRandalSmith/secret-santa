@@ -6,7 +6,7 @@ const PeopleList = ({people, deletePerson, secret}) => {
     const [anotherIsOpen, setAnotherIsOpen] = useState(false);
 
     let ulStyle = {
-        paddingLeft: "0" , // TODO hmmm maybe some padding here?
+        paddingLeft: "0", // TODO hmmm maybe some padding here?
         flexBasis: "100%",
     };
 

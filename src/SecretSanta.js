@@ -8,7 +8,7 @@ export const SecretSanta = () => {
     const [people, setPeople] = useState(mockPeople);
     const [secretPeople, setSecretPeople] = useState([]);
     const [poo, setPoo] = useState(false);
-    const [done, setDone] = useState(false);
+    const [merryXmas, setMerryXmas] = useState(false);
 
 
     const handleSubmit = (newName) => {
@@ -48,11 +48,9 @@ export const SecretSanta = () => {
         const indexOf = secretPeople.indexOf(name);
         const newList = people.filter((e, i) => i !== indexOf);
         const newSecretList = secretPeople.filter((e, i) => i !== indexOf);
-        setDone(true);
-        setTimeout(() => {
-            setPeople(newList);
-            setSecretPeople(newSecretList);
-        }, 870);
+        setMerryXmas(true);
+        setPeople(newList);
+        setSecretPeople(newSecretList);
     };
 
     const styles = {
@@ -85,7 +83,7 @@ export const SecretSanta = () => {
                     }
                 </div>
                 :
-                <p style={styles.para}>{done ? "Merry Christmas!!!" : "Please enter a name"}</p>
+                <p style={styles.para}>{merryXmas ? "Merry Christmas!!!" : "Please enter a name"}</p>
 
             }
             {people.length > 0 &&

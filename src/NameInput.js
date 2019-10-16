@@ -20,14 +20,17 @@ const NameInput = ({handleSubmit, handleShuffle, err}) => {
          // background: "rgb(0,143,16)",
           color: "black",
           padding: "25px",
-      }
+      },
+        label: {
+          fontSize: "2.2em",
+        }
     };
 
     return (
         <form
             className={err && "animated shake"}
             style={styles.formStyle}>
-            <label htmlFor="">Enter Name:
+            <label style={styles.label}>Enter Name:
                 <input
                     style={{marginLeft: "10px"}}
                     value={newName}

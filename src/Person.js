@@ -6,13 +6,12 @@ import React, {useState, useEffect} from 'react';
 const Person = ({name, isSecret, deletePerson, number, anotherOpen, setAnotherOpen}) => {
     const [revealed, setRevealed] = useState(false);
     const [showShake, setShowShake] = useState(false);
-    const [deleteAnimation, setDeleteAnimation] = useState(false);
     const [fosho, setFosho] = useState(false);
 
-    useEffect(() => {
-        let resetTimer = setTimeout(() => setFosho(false), 3000);
-        return () => clearTimeout(resetTimer);
-    }, [fosho, setFosho]);
+    // useEffect(() => {
+    //     let resetTimer = setTimeout(() => setFosho(false), 3000);
+    //     return () => clearTimeout(resetTimer);
+    // }, [fosho, setFosho]);
 
     const noCheating = () => {
         setShowShake(true);
@@ -67,7 +66,6 @@ const Person = ({name, isSecret, deletePerson, number, anotherOpen, setAnotherOp
                         if (anotherOpen) noCheating();
                         else if (!fosho) {
                             setFosho(true);
-                            //setTimeout(() => setFosho(false), 3000);
                         } else {
                             setAnotherOpen(true);
                             setRevealed(true);
@@ -78,14 +76,13 @@ const Person = ({name, isSecret, deletePerson, number, anotherOpen, setAnotherOp
         );
     } else {
         return (
-            <li className={!revealed ? "animated fadeInDown" : deleteAnimation ? "animated zoomOutRight" : "animated flipInX"}
+            <li className={!revealed ? "animated fadeInDown" : "animated flipInX"}
                 style={styles.listItem}>
                 <p>{name}</p>
                 <button
                     style={styles.btnStyle}
                     onClick={() => {
                         setAnotherOpen(false);
-                        setDeleteAnimation(true);
                         deletePerson(name);
                     }}>
                     {isSecret ? 'got it!' : 'delete'}
